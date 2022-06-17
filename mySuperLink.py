@@ -12,7 +12,8 @@ Some key things needed are:
     to do:
     insert(index,value) - add a value to specific index
     crypto() - cryptographically store/conceal the data stored in the node
-    delete(value) = find that value/values and delete from index
+    delete(value) - find that value/values and delete from index
+    search(value) - determine if and how many times that value appears in the list
 """
 
 
@@ -72,13 +73,27 @@ class linkedList:
             current_node = current_node.next_node
         return current_node.value
 
+    # insert(index, value) places the value provided at the indexed location in the linkedList
+
+    def insert(self, index, value):
+        new_node = node(value)
+
+        # get the indexed node, we're going to add the new one here
+        # and bump everything else down right by 1
+        # insert_node = self.get(index)
+
+        # you need to tie in these indexes, so you don't lose the links
+        forward_node = self.get(index)
+        back_node = self.get(index-1)
+        back_node.next_node = new_node
+        new_node.next_node = forward_node
+
 # test out  your linkedList
 
 
 ll = linkedList()
-for var in range(51):
+for var in range(8):
     ll.append(f'data_element_{var}')
 ll.show_list()
 print(f'There are a total of {ll.count()} nodes')
-print(f'{ll.get(51)} is the value at index provided.')
-# add code for deletion next...
+ll.insert(5,4)
