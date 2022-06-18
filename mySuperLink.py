@@ -6,7 +6,7 @@ Some key things needed are:
 
     append(value) - add a new value to the end of the list
     count() - returns the total number of nodes in the list
-    get(index) - returns the value at the index provided
+    getVal(index) - returns the value at the index provided
     show_list() - get a read out of all node values
 
     to do:
@@ -60,7 +60,7 @@ class linkedList:
     # which is the numeric link placement within LinkedList.
     # i.e. index=5 returns the value of the 5th node.
 
-    def get(self, index) -> str:
+    def getVal(self, index) -> str:
         # ensure the index given is within range of our LL
         if index > self.count():
             return f'Your selection of {index} is out of range of this list'
@@ -74,26 +74,42 @@ class linkedList:
         return current_node.value
 
     # insert(index, value) places the value provided at the indexed location in the linkedList
+    # location greater than 0
 
     def insert(self, index, value):
-        new_node = node(value)
+        if index > self.count():
+            return f'Your selection of {index} is out of range of this list'
 
-        # get the indexed node, we're going to add the new one here
+        # go to the indexed node, that is where we'll add the new node
         # and bump everything else down right by 1
-        # insert_node = self.get(index)
 
-        # you need to tie in these indexes, so you don't lose the links
-        forward_node = self.get(index)
-        back_node = self.get(index-1)
-        back_node.next_node = new_node
-        new_node.next_node = forward_node
+        current_index = 0
+        previous_node = self.head
+        current_node = self.head
+
+        while True:
+            current_node = current_node.next_node
+            if current_index == index:
+                # do stuff to nodes, else
+                new_node = node(value)
+                new_node.next_node = current_node
+                previous_node.next_node = new_node
+                return
+            previous_node = current_node
+            current_index += 1
+
+
 
 # test out  your linkedList
 
 
 ll = linkedList()
-for var in range(8):
+for var in range(10):
     ll.append(f'data_element_{var}')
 ll.show_list()
 print(f'There are a total of {ll.count()} nodes')
-ll.insert(5,4)
+ll.insert(0,4)
+ll.show_list()
+ll.insert(1,'bobcat')
+ll.show_list()
+
