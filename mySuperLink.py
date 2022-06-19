@@ -40,6 +40,7 @@ class linkedList:
 
     # return the number of nodes in the linked list
 
+# i think count is right for the wrong reason - fix it
     def count(self):
         num = 0
         current_node = self.head
@@ -50,6 +51,7 @@ class linkedList:
 
     # Show all LinkedList data elements in list format.
 
+# i don't think this ever presents the last node - fix it
     def show_list(self):
         nodelist = []
         current_node = self.head
@@ -105,6 +107,24 @@ class linkedList:
     # delete will remove all instances of the value passed yet leave
     # the linkedlist in 1 piece!
 
+    # You need to see if this deals with first node deletion correctly
+
+    # Deletes the node at index 'index'.
+    def delete(self, index):
+        if index >= self.length() or index < 0:  # added 'index<0' post-video
+            print("ERROR: 'Erase' Index out of range!")
+            return
+        cur_idx = 0
+        cur_node = self.head
+        while True:
+            last_node = cur_node
+            cur_node = cur_node.next
+            if cur_idx == index:
+                last_node.next = cur_node.next
+                return
+            cur_idx += 1
+
+"""
     def delete(self,value):
         # start at the beginning of the list, then work your way right to the end
         current_node = self.head
@@ -112,26 +132,27 @@ class linkedList:
         iterator = 0
 
         while True:
-            if (current_node.value == value):
+            if(current_node.value == value):
                 #this condition should support if first value is equal to data set
-                elif(current_node == self.head):
-                    ll.head = current_node.next_node
+                if current_node is self.head : # then we are dealing with first node
+                    self.head = current_node.next_node
+                    current_node = current_node.next_node
+                    previous_node = self.head
+                    continue
+                previous_node.next_node = current_node.next_node
 
 
-
-
-
-
-
-
+"""
 
 
 ll = linkedList()
-for var in range(25):
+for var in range(5):
+    print(var, end=',')
     ll.append(f'data_element_{var}')
 ll.show_list()
-print(f'There are a total of {ll.count()} nodes')
-ll.insert(10,'tenth item')
-ll.show_list()
+print(ll.count())
+#print(f'There are a total of {ll.count()} nodes')
+#ll.insert(10,'tenth item')
+#ll.show_list()
 
 
