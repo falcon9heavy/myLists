@@ -4,16 +4,18 @@
 Creating a linkedList that I've customized for full use in other programs when required.
 Some key things needed are:
 
+done:
     append(value) - add a new value to the end of the list
     count() - returns the total number of nodes in the list
     getVal(index) - returns the value at the index provided
     show_list() - get a read out of all node values
-
-    to do:
     insert(index,value) - add a value to specific index
+    delete(value) - find that value/values and delete them ALL from index
+
+to do:
     crypto() - cryptographically store/conceal the data stored in the node
-    delete(value) - find that value/values and delete from index
     search(value) - determine if and how many times that value appears in the list
+
 """
 
 
@@ -98,18 +100,38 @@ class linkedList:
             previous_node = current_node
             current_index += 1
 
-
-
 # test out  your linkedList
+
+    # delete will remove all instances of the value passed yet leave
+    # the linkedlist in 1 piece!
+
+    def delete(self,value):
+        # start at the beginning of the list, then work your way right to the end
+        current_node = self.head
+        previous_node = self.head
+        iterator = 0
+
+        while True:
+            if (current_node.value == value):
+                #this condition should support if first value is equal to data set
+                elif(current_node == self.head):
+                    ll.head = current_node.next_node
+
+
+
+
+
+
+
+
 
 
 ll = linkedList()
-for var in range(10):
+for var in range(25):
     ll.append(f'data_element_{var}')
 ll.show_list()
 print(f'There are a total of {ll.count()} nodes')
-ll.insert(0,4)
+ll.insert(10,'tenth item')
 ll.show_list()
-ll.insert(1,'bobcat')
-ll.show_list()
+
 
