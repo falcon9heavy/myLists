@@ -55,9 +55,12 @@ class linkedList:
     def show_list(self):
         nodelist = []
         current_node = self.head
-        while current_node.next_node is not None:
+        while True:
             nodelist.append(current_node.value)
-            current_node = current_node.next_node
+            if current_node.next_node is None:
+                break
+            else:
+                current_node = current_node.next_node
         print(nodelist)
 
     # the get() function returns the value of the node at a location (index)
@@ -109,50 +112,27 @@ class linkedList:
 
     # You need to see if this deals with first node deletion correctly
 
-    # Deletes the node at index 'index'.
-    def delete(self, index):
-        if index >= self.length() or index < 0:  # added 'index<0' post-video
-            print("ERROR: 'Erase' Index out of range!")
-            return
-        cur_idx = 0
-        cur_node = self.head
-        while True:
-            last_node = cur_node
-            cur_node = cur_node.next
-            if cur_idx == index:
-                last_node.next = cur_node.next
-                return
-            cur_idx += 1
-
-"""
     def delete(self,value):
         # start at the beginning of the list, then work your way right to the end
-        current_node = self.head
-        previous_node = self.head
-        iterator = 0
-
+        current_node = self.head  # you sort of preserved the head for the list with this assignment
         while True:
-            if(current_node.value == value):
-                #this condition should support if first value is equal to data set
-                if current_node is self.head : # then we are dealing with first node
-                    self.head = current_node.next_node
-                    current_node = current_node.next_node
-                    previous_node = self.head
-                    continue
+            previous_node = current_node
+            current_node = current_node.next_node
+            if current_node.value == value:
+                # if this condition is met, we just want to point past the current node
                 previous_node.next_node = current_node.next_node
+                return
 
-
-"""
-
-
+# your test code branch
 ll = linkedList()
-for var in range(5):
+for var in range(0,10):
     print(var, end=',')
     ll.append(f'data_element_{var}')
 ll.show_list()
 print(ll.count())
-#print(f'There are a total of {ll.count()} nodes')
-#ll.insert(10,'tenth item')
-#ll.show_list()
+ll.delete('data_element_9')
+ll.show_list()
+print(ll.__sizeof__())
+
 
 
